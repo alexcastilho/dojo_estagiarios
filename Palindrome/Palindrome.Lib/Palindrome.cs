@@ -11,6 +11,8 @@ namespace Palindrome.Lib
     {
         public bool Verificar(string palavra)
         {
+            string teste = palavra.Normalize(NormalizationForm.FormC);
+
             palavra = Prepare(palavra);
             int i = 0;
             int j = palavra.Length - 1;
@@ -21,12 +23,14 @@ namespace Palindrome.Lib
                     return false;
                 }
             }
+
             return true;
         }
+
         private string Prepare(string palavra)
         {
-
             string nova_frase = palavra.ToLower().Replace("-", "");
+
             nova_frase = nova_frase.Replace(" ", "");
             nova_frase = nova_frase.Replace("á", "a");
             nova_frase = nova_frase.Replace("é", "e");
@@ -48,6 +52,7 @@ namespace Palindrome.Lib
             nova_frase = nova_frase.Replace(";", "");
             nova_frase = nova_frase.Replace(":", "");
             nova_frase = nova_frase.Replace("à", "a");
+
             return nova_frase;
         }
 
@@ -62,6 +67,7 @@ namespace Palindrome.Lib
             {
                 string[] arquivo = File.ReadAllLines(path);
                 StringBuilder conteudo = new StringBuilder();
+
                 for (int i = 0; i < arquivo.Length; i++)
 			    {
                     if (!conteudo.ToString().Contains(arquivo[i]))
