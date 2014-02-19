@@ -9,12 +9,10 @@ namespace ATMStags.Business
 {
     public class MaquinaBusiness
     {
-        CartaoBusiness cartaoBusiness;
-
         public void Sacar(CartaoModel cartao, double valor, MaquinaModel maquina)
         {
             ContaBusiness contaBusiness = new ContaBusiness();
-            cartaoBusiness = new CartaoBusiness();           
+            CartaoBusiness cartaoBusiness = new CartaoBusiness();
 
             if (PossuiSaldo(maquina, valor) && 
                 cartaoBusiness.VerificarValidade(cartao) && 
@@ -27,7 +25,10 @@ namespace ATMStags.Business
 
         private bool PossuiSaldo(MaquinaModel maquina, double valor)
         {
-            return (maquina.Saldo >= valor);
+            if (maquina.Saldo < valor)
+                throw new MaquinaSaldoInsuficienteException();
+
+            return true;
         }
 
         private void Debitar(MaquinaModel maquina, double valor)

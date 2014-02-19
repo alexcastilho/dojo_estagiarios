@@ -27,7 +27,6 @@ namespace ATMStags.MaquinaTest
             conta = new ContaModel();
         }
 
-
         [TestMethod]
         public void TestSaldoSuficiente()
         {
@@ -42,19 +41,7 @@ namespace ATMStags.MaquinaTest
         }
 
         [TestMethod]
-        public void TestSaldoInsuficiente()
-        {
-            cartao.Conta = conta;
-            cartao.Conta.Saldo = int.MaxValue;
-            cartao.Cliente = cliente;
-            maquina.Saldo = 0;
-
-            maquinaBusiness.Sacar(cartao, 50, maquina);
-            Assert.AreEqual(0, maquina.Saldo);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(SaldoInsuficienteException))]
+        [ExpectedException(typeof(MaquinaSaldoInsuficienteException))]
         public void TestSaldoInsuficienteException()
         {
             cartao.Conta = conta;

@@ -8,7 +8,7 @@ namespace ATMStags.Model
 {
     public class ContaModel
     {
-        public double Saldo { get; set; }
         public int Id { get; set; }
+        public double Saldo { get; set; }
     }
 }

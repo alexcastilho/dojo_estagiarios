@@ -1,9 +1,4 @@
 ﻿using ATMStags.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ATMStags.Business
 {
@@ -13,6 +8,7 @@ namespace ATMStags.Business
         {
             conta.Saldo -= valor;
         }
+
         public bool VerificarSaldo(ContaModel conta, double valor)
         {
             if (conta.Saldo < valor)
@@ -21,6 +17,4 @@ namespace ATMStags.Business
             return true;
         }
     }
-
-
 }

@@ -43,6 +43,7 @@
     <Compile Include="ContaBusiness.cs" />
     <Compile Include="Exceptions\CartaoInvalidoException.cs" />
     <Compile Include="Exceptions\SaldoInsuficienteException.cs" />
+    <Compile Include="Exceptions\MaquinaSaldoInsuficienteException.cs" />
     <Compile Include="MaquinaBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -8,9 +8,9 @@ namespace ATMStags.Model
 {
     public class CartaoModel
     {
+        public int Id { get; set; }
         public DateTime DataValidade { get; set; }
         public ClienteModel Cliente { get; set; }
-        public int Id { get; set; }
         public ContaModel Conta { get; set; }
     }
 }

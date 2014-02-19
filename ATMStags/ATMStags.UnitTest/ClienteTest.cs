@@ -34,9 +34,12 @@ namespace ATMStags.UnitTest
             cartao.Id = 1;
             cartao.Conta.Saldo = 100;
             maquina.Saldo = Int64.MaxValue;
+            
             maquinaBusiness.Sacar(cartao, 50, maquina);
+
             Assert.AreEqual(50, cartao.Conta.Saldo);
         }
+
         [TestMethod]
         [ExpectedException(typeof(SaldoInsuficienteException))]
         public void TestSaldoInsuficiente()
@@ -47,7 +50,9 @@ namespace ATMStags.UnitTest
             cartao.Id = 1;
             cartao.Conta.Saldo = 100;
             maquina.Saldo = Int64.MaxValue;
+
             maquinaBusiness.Sacar(cartao, 101, maquina);
+
             Assert.AreEqual(100, cartao.Conta.Saldo);
         }
 
@@ -55,19 +60,14 @@ namespace ATMStags.UnitTest
         [ExpectedException(typeof(CartaoInvalidoException))]
         public void TestCartaoInvalido()
         {
-
             cartao.Conta = conta;
             cartao.Cliente = cliente;
             cartao.DataValidade = DateTime.Now.AddYears(-5);
             cartao.Id = 1;
             cartao.Conta.Saldo = 100;
             maquina.Saldo = Int64.MaxValue;
+
             maquinaBusiness.Sacar(cartao, 10, maquina);
-
-
-            //throw new CartaoInvalidoException();
-
-
         }
     }
 }
