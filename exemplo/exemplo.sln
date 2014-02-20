@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exemplo.data", "exemplo.data\exemplo.data.csproj", "{DFEBCF58-A10F-477B-82C1-EE06EAE6262F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exemplo.business", "exemplo.business\exemplo.business.csproj", "{FAE28E9B-0BEC-40F3-83A7-1DC2D9848167}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exemplo.model", "exemplo.model\exemplo.model.csproj", "{013F9135-9B62-41FD-BD2D-22E01408B199}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exemplo.unittest", "exemplo.unittest\exemplo.unittest.csproj", "{83FEA6CF-5EE3-4BC8-B172-7CE329831CA9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DFEBCF58-A10F-477B-82C1-EE06EAE6262F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFEBCF58-A10F-477B-82C1-EE06EAE6262F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFEBCF58-A10F-477B-82C1-EE06EAE6262F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFEBCF58-A10F-477B-82C1-EE06EAE6262F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAE28E9B-0BEC-40F3-83A7-1DC2D9848167}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAE28E9B-0BEC-40F3-83A7-1DC2D9848167}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAE28E9B-0BEC-40F3-83A7-1DC2D9848167}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAE28E9B-0BEC-40F3-83A7-1DC2D9848167}.Release|Any CPU.Build.0 = Release|Any CPU
+		{013F9135-9B62-41FD-BD2D-22E01408B199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{013F9135-9B62-41FD-BD2D-22E01408B199}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{013F9135-9B62-41FD-BD2D-22E01408B199}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{013F9135-9B62-41FD-BD2D-22E01408B199}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83FEA6CF-5EE3-4BC8-B172-7CE329831CA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83FEA6CF-5EE3-4BC8-B172-7CE329831CA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83FEA6CF-5EE3-4BC8-B172-7CE329831CA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83FEA6CF-5EE3-4BC8-B172-7CE329831CA9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
+	EndGlobalSection
+EndGlobal

@@ -1,8 +1,12 @@
-﻿using ATMStags.Model;
+﻿using ATMStags.Business.Interfaces;
+using ATMStags.Model;
+using System.Collections.Generic;
+using System;
+using ATMStags.Data;
 
 namespace ATMStags.Business
 {
-    public class ContaBusiness
+    public class ContaBusiness : IBusiness<ContaModel>
     {
         public void Debitar(ContaModel conta, double valor)
         {
@@ -15,6 +19,40 @@ namespace ATMStags.Business
                 throw new SaldoInsuficienteException();
 
             return true;
+        }
+
+        public void Inserir(ContaModel obj)
+        {
+            try
+            {
+                ContaData data = new ContaData();
+                data.Inserir(obj);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+
+        public void Atualizar(ContaModel obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Remover(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ContaModel Buscar(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public List<ContaModel> BuscarTodos()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

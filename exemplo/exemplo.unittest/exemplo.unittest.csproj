@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CD1F9B3F-824E-472C-8A77-C7AC9AC3C48A}</ProjectGuid>
+    <ProjectGuid>{83FEA6CF-5EE3-4BC8-B172-7CE329831CA9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ATMStags.UnitTest</RootNamespace>
-    <AssemblyName>ATMStags.UnitTest</AssemblyName>
+    <RootNamespace>exemplo.unittest</RootNamespace>
+    <AssemblyName>exemplo.unittest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -50,20 +50,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CartaoTest.cs" />
     <Compile Include="ClienteTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MaquinaTest.cs" />
-    <Compile Include="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ATMStags.Business\ATMStags.Business.csproj">
-      <Project>{3539257d-8269-44e7-8ecb-8bf8d55415a2}</Project>
-      <Name>ATMStags.Business</Name>
+    <ProjectReference Include="..\exemplo.business\exemplo.business.csproj">
+      <Project>{fae28e9b-0bec-40f3-83a7-1dc2d9848167}</Project>
+      <Name>exemplo.business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ATMStags.Model\ATMStags.Model.csproj">
-      <Project>{68a03119-52d8-41b5-a2bd-5430d080ef17}</Project>
-      <Name>ATMStags.Model</Name>
+    <ProjectReference Include="..\exemplo.model\exemplo.model.csproj">
+      <Project>{013f9135-9b62-41fd-bd2d-22e01408b199}</Project>
+      <Name>exemplo.model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

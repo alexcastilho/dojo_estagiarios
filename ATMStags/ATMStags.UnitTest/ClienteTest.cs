@@ -69,5 +69,32 @@ namespace ATMStags.UnitTest
 
             maquinaBusiness.Sacar(cartao, 10, maquina);
         }
+
+
+        [TestMethod]
+        public void TestInserir()
+        {
+            ClienteBusiness clienteBusiness = new ClienteBusiness();
+            CartaoBusiness cartaoBusiness = new CartaoBusiness();
+            ContaBusiness contaBusiness = new ContaBusiness();
+
+            cartao.DataValidade = DateTime.Now;
+            cartaoBusiness.Inserir(cartao);
+
+            conta.Saldo = 1000;
+            contaBusiness.Inserir(conta);
+
+            cliente.Nome = "Joao";
+            cliente.RG = "37749564-x";
+            cliente.Sobrenome = "Da Silva";
+            cliente.Idade = 103;
+            cliente.CPF= "00000000001";
+            cliente.IdCartao = cartao.Id;
+            cliente.IdConta = conta.Id;
+            clienteBusiness.Inserir(cliente);
+
+            Assert.IsTrue(cliente.Id > 0);
+        }
+
     }
 }
