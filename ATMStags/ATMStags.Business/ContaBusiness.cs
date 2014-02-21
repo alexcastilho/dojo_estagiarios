@@ -30,7 +30,6 @@ namespace ATMStags.Business
             }
             catch (Exception)
             {
-                
                 throw;
             }
         }

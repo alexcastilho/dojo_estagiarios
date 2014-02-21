@@ -14,9 +14,10 @@ namespace ATMStags.Model
         public String CPF { get; set; }
         public String RG { get; set; }
         public int Idade { get; set; }
-
         public int IdCartao { get; set; }
-
         public int IdConta { get; set; }
+
+        public CartaoModel Cartao { get; set; }
+        public ContaModel Conta { get; set; }
     }
 }

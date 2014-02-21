@@ -11,12 +11,17 @@ namespace ATMStags.Business
 {
     public class ClienteBusiness : IBusiness<ClienteModel>
     {
-
         public void Inserir(ClienteModel obj)
         {
-            ClienteData data = new ClienteData();
-            data.Inserir(obj);
-             
+            try
+            {
+                ClienteData data = new ClienteData();
+                data.Inserir(obj);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void Atualizar(ClienteModel obj)

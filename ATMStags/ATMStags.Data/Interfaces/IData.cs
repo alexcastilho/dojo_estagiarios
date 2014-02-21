@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 namespace ATMStags.Data.Interfaces
 {
     public interface IData<T>

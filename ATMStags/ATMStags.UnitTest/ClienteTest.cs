@@ -11,8 +11,8 @@ namespace ATMStags.UnitTest
     {
         MaquinaBusiness maquinaBusiness;
         MaquinaModel maquina;
-        CartaoModel cartao;
         ClienteModel cliente;
+        CartaoModel cartao;
         ContaModel conta;
 
         [TestInitialize]
@@ -20,54 +20,54 @@ namespace ATMStags.UnitTest
         {
             maquinaBusiness = new MaquinaBusiness();
             maquina = new MaquinaModel();
-            cartao = new CartaoModel();
             cliente = new ClienteModel();
+            cartao = new CartaoModel();
             conta = new ContaModel();
         }
 
         [TestMethod]
         public void TestSaldoSuficiente()
         {
-            cartao.Conta = conta;
-            cartao.Cliente = cliente;
-            cartao.DataValidade = DateTime.Now.AddYears(5);
-            cartao.Id = 1;
-            cartao.Conta.Saldo = 100;
+            cliente.Conta = conta;
+            cliente.Cartao = cartao;
+            cliente.Cartao.DataValidade = DateTime.Now.AddYears(5);
+            cliente.Id = 1;
+            cliente.Conta.Saldo = 100;
             maquina.Saldo = Int64.MaxValue;
             
-            maquinaBusiness.Sacar(cartao, 50, maquina);
+            maquinaBusiness.Sacar(cliente, 50, maquina);
 
-            Assert.AreEqual(50, cartao.Conta.Saldo);
+            Assert.AreEqual(50, cliente.Conta.Saldo);
         }
 
         [TestMethod]
         [ExpectedException(typeof(SaldoInsuficienteException))]
         public void TestSaldoInsuficiente()
         {
-            cartao.Conta = conta;
-            cartao.Cliente = cliente;
-            cartao.DataValidade = DateTime.Now.AddYears(5);
-            cartao.Id = 1;
-            cartao.Conta.Saldo = 100;
+            cliente.Conta = conta;
+            cliente.Cartao = cartao;
+            cliente.Cartao.DataValidade = DateTime.Now.AddYears(5);
+            cliente.Id = 1;
+            cliente.Conta.Saldo = 100;
             maquina.Saldo = Int64.MaxValue;
 
-            maquinaBusiness.Sacar(cartao, 101, maquina);
+            maquinaBusiness.Sacar(cliente, 101, maquina);
 
-            Assert.AreEqual(100, cartao.Conta.Saldo);
+            Assert.AreEqual(100, cliente.Conta.Saldo);
         }
 
         [TestMethod]
         [ExpectedException(typeof(CartaoInvalidoException))]
         public void TestCartaoInvalido()
         {
-            cartao.Conta = conta;
-            cartao.Cliente = cliente;
-            cartao.DataValidade = DateTime.Now.AddYears(-5);
-            cartao.Id = 1;
-            cartao.Conta.Saldo = 100;
+            cliente.Conta = conta;
+            cliente.Cartao = cartao;
+            cliente.Cartao.DataValidade = DateTime.Now.AddYears(-5);
+            cliente.Id = 1;
+            cliente.Conta.Saldo = 100;
             maquina.Saldo = Int64.MaxValue;
 
-            maquinaBusiness.Sacar(cartao, 10, maquina);
+            maquinaBusiness.Sacar(cliente, 10, maquina);
         }
 
 
@@ -78,8 +78,9 @@ namespace ATMStags.UnitTest
             CartaoBusiness cartaoBusiness = new CartaoBusiness();
             ContaBusiness contaBusiness = new ContaBusiness();
 
-            cartao.DataValidade = DateTime.Now;
-            cartaoBusiness.Inserir(cartao);
+            cliente.Cartao = cartao;
+            cliente.Cartao.DataValidade = DateTime.Now;
+            cartaoBusiness.Inserir(cliente.Cartao);
 
             conta.Saldo = 1000;
             contaBusiness.Inserir(conta);
@@ -91,10 +92,10 @@ namespace ATMStags.UnitTest
             cliente.CPF= "00000000001";
             cliente.IdCartao = cartao.Id;
             cliente.IdConta = conta.Id;
+
             clienteBusiness.Inserir(cliente);
 
-            Assert.IsTrue(cliente.Id > 0);
+            Assert.IsTrue(cartao.Id > 0);
         }
-
     }
 }

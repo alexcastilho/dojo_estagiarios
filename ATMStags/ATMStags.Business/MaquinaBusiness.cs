@@ -4,16 +4,16 @@ namespace ATMStags.Business
 {
     public class MaquinaBusiness
     {
-        public void Sacar(CartaoModel cartao, double valor, MaquinaModel maquina)
+        public void Sacar(ClienteModel cliente, double valor, MaquinaModel maquina)
         {
             ContaBusiness contaBusiness = new ContaBusiness();
             CartaoBusiness cartaoBusiness = new CartaoBusiness();
 
             if (PossuiSaldo(maquina, valor) && 
-                cartaoBusiness.VerificarValidade(cartao) && 
-                contaBusiness.VerificarSaldo(cartao.Conta, valor))
+                cartaoBusiness.VerificarValidade(cliente.Cartao) && 
+                contaBusiness.VerificarSaldo(cliente.Conta, valor))
             {
-                contaBusiness.Debitar(cartao.Conta, valor);
+                contaBusiness.Debitar(cliente.Conta, valor);
                 Debitar(maquina, valor);
             }
         }

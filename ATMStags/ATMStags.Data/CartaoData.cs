@@ -26,7 +26,9 @@ namespace ATMStags.Data
                 {
                     db.AddInParameter(cmd, "@DATAVALIDADE", System.Data.DbType.DateTime, obj.DataValidade);
                     db.AddOutParameter(cmd, "@ID", System.Data.DbType.Int32, 4);
+                    
                     db.ExecuteNonQuery(cmd);
+
                     obj.Id = (int)cmd.Parameters["@ID"].Value;
                 }
             }
@@ -49,6 +51,7 @@ namespace ATMStags.Data
         public CartaoModel Buscar(int Id)
         {
             CartaoModel cartao = null;
+
             try
             {
                 Database db = new DatabaseProviderFactory().Create("Database");
@@ -67,11 +70,11 @@ namespace ATMStags.Data
                         }
                     }
                 }
+
                 return cartao;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -98,11 +101,11 @@ namespace ATMStags.Data
                         }
                     }
                 }
+
                 return cartoes;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

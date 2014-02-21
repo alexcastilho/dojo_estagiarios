@@ -30,13 +30,16 @@ namespace ATMStags.MaquinaTest
         [TestMethod]
         public void TestSaldoSuficiente()
         {
-            cartao.Conta = conta;
-            cartao.Conta.Saldo = Int16.MaxValue;
-            cartao.Cliente = cliente;
-            cartao.DataValidade = DateTime.Now.AddYears(5);
-            cartao.Id = 1;
+            cliente.Cartao = cartao;
+            cliente.Conta = conta;
+            cliente.Conta.Saldo = Int16.MaxValue;
+            cliente.Cartao.DataValidade = DateTime.Now.AddYears(5);
+            cliente.Cartao.Id = 1;
+            
             maquina.Saldo = 100;
-            maquinaBusiness.Sacar(cartao, 50, maquina);
+
+            maquinaBusiness.Sacar(cliente, 50, maquina);
+            
             Assert.AreEqual(50, maquina.Saldo);
         }
 
@@ -44,12 +47,11 @@ namespace ATMStags.MaquinaTest
         [ExpectedException(typeof(MaquinaSaldoInsuficienteException))]
         public void TestSaldoInsuficienteException()
         {
-            cartao.Conta = conta;
-            cartao.Conta.Saldo = int.MaxValue;
-            cartao.Cliente = cliente;
+            cliente.Conta = conta;
+            cliente.Conta.Saldo = int.MaxValue;
             maquina.Saldo = 0;
 
-            maquinaBusiness.Sacar(cartao, 50, maquina);
+            maquinaBusiness.Sacar(cliente, 50, maquina);
         }
     }
 }
