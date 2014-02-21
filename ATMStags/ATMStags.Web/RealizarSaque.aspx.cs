@@ -18,14 +18,14 @@ namespace ATMStags.Web
 
         protected void btnSacar_Click(object sender, EventArgs e)
         {
-            ClienteModel cliente = new ClienteModel();
             ClienteBusiness clienteBusiness = new ClienteBusiness();
+            ClienteModel cliente = clienteBusiness.Buscar(Convert.ToInt32(txtCodigoCliente.Text.Trim()));
 
-            ContaModel conta = new ContaModel();
-            ContaBusiness contaBusiness = new ContaBusiness();
+            MaquinaBusiness maquinaBusiness = new MaquinaBusiness();
+            MaquinaModel maquinaFake = new MaquinaModel();
+            maquinaFake.Saldo = double.MaxValue; //não fizemos a persistência das informações de máquina
 
-            CartaoModel cartao = new CartaoModel();
-            CartaoBusiness cartaoBusiness = new CartaoBusiness();
+            maquinaBusiness.Sacar(cliente, Convert.ToDouble(txtValor.Text.Trim()), maquinaFake);
         }
     }
 }

@@ -23,7 +23,6 @@ namespace ATMStags.Data
                                VALUES (@NOME, @SOBRENOME, @CPF, @RG, @IDADE, @IDCONTA, @IDCARTAO) 
                                SET @ID=(@@IDENTITY)";
 
-
                 using (DbCommand cmd = db.GetSqlStringCommand(query))
                 {
                     db.AddInParameter(cmd, "@NOME", System.Data.DbType.String, obj.Nome);
@@ -34,29 +33,21 @@ namespace ATMStags.Data
                     db.AddInParameter(cmd, "@IDCONTA", System.Data.DbType.Int32, obj.IdConta);
                     db.AddInParameter(cmd, "@IDCARTAO", System.Data.DbType.Int32, obj.IdCartao);
                     db.AddOutParameter(cmd, "@ID", System.Data.DbType.Int16, 4);
+
                     db.ExecuteNonQuery(cmd);
+
                     obj.Id = Convert.ToInt32(cmd.Parameters["@ID"].Value);
                 }
             }
             catch (Exception)
             {
-
                 throw;
             }
-
         }
-
 
         public void Atualizar(ClienteModel obj)
         {
-            try
-            {
-            
-            }
-            catch()
-            {
-            
-            }
+            throw new NotImplementedException();
         }
 
         public void Remover(ClienteModel obj)
@@ -66,6 +57,8 @@ namespace ATMStags.Data
 
         public ClienteModel Buscar(int id)
         {
+            ClienteModel cliente = null;
+
             try 
             {
                 Database db = new DatabaseProviderFactory().Create("Database");
@@ -78,16 +71,28 @@ namespace ATMStags.Data
                 {
                     db.AddInParameter(cmd, "@ID", DbType.Int32, id);
                     
-                   
                     using(IDataReader dr = db.ExecuteReader(cmd))
                     {
-                                            
+                        if (dr.Read())
+                        {
+                            cliente = new ClienteModel();
+                            cliente.Id = Convert.ToInt32(dr["ID"]);
+                            cliente.Nome = Convert.ToString(dr["NOME"]);
+                            cliente.Sobrenome = Convert.ToString(dr["SOBRENOME"]);
+                            cliente.CPF = Convert.ToString(dr["CPF"]);
+                            cliente.RG = Convert.ToString(dr["RG"]);
+                            cliente.Idade = Convert.ToInt32(dr["IDADE"]);
+                            cliente.IdCartao = Convert.ToInt32(dr["IDCARTAO"]);
+                            cliente.IdConta = Convert.ToInt32(dr["IDCONTA"]);
+                        }
                     }
                 }
+
+                return cliente;
             }
             catch(Exception)
             {
-            
+                throw;
             }
         }
 
@@ -99,6 +104,7 @@ namespace ATMStags.Data
         public List<ClienteInfoModel> BuscarTodasInformacoes()
         {
             List<ClienteInfoModel> listaClienteInfo = new List<ClienteInfoModel>();
+
             try
             {
                 Database db = new DatabaseProviderFactory().Create("Database");
@@ -108,7 +114,6 @@ namespace ATMStags.Data
                                 FROM CLIENTE CLI
                                 INNER JOIN CARTAO CAR ON CLI.IDCARTAO = CAR.ID
                                 INNER JOIN CONTA CON ON CON.ID = CLI.IDCONTA";
-
 
                 using (DbCommand cmd = db.GetSqlStringCommand(query))
                 {
@@ -130,10 +135,10 @@ namespace ATMStags.Data
                             clienteInfo.IdConta = Convert.ToInt32(dr["IDCONTA"]);                        
 
                             listaClienteInfo.Add(clienteInfo);
-                            
                         }
                     }
                 }
+
                 return listaClienteInfo;
             }
             catch (Exception)

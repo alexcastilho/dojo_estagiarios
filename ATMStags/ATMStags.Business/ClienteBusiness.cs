@@ -36,8 +36,26 @@ namespace ATMStags.Business
 
         public ClienteModel Buscar(int id)
         {
-            ClienteData data = new ClienteData();
-            data.Buscar(id);
+            try
+            {
+                ClienteData data = new ClienteData();
+                ClienteModel cliente = data.Buscar(id);
+
+                if (cliente != null)
+                {
+                    CartaoBusiness cartaoBusiness = new CartaoBusiness();
+                    ContaBusiness contaBusiness = new ContaBusiness();
+
+                    cliente.Cartao = cartaoBusiness.Buscar(cliente.IdCartao);
+                    cliente.Conta = contaBusiness.Buscar(cliente.IdConta);
+                }
+
+                return cliente;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public List<ClienteModel> BuscarTodos()

@@ -46,7 +46,15 @@ namespace ATMStags.Business
 
         public ContaModel Buscar(int id)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                ContaData data = new ContaData();
+                return data.Buscar(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public List<ContaModel> BuscarTodos()
