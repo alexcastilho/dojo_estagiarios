@@ -5,10 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Data.Common;
+using ATMStags.Model;
+using ATMStags.Data.Interfaces;
+using System.Data;
 
 namespace ATMStags.Data
 {
-    public class ClienteData
+    public class ClienteData : IData<ClienteModel>
     {
         public void Inserir(Model.ClienteModel obj)
         {
@@ -41,6 +44,102 @@ namespace ATMStags.Data
                 throw;
             }
 
+        }
+
+
+        public void Atualizar(ClienteModel obj)
+        {
+            try
+            {
+            
+            }
+            catch()
+            {
+            
+            }
+        }
+
+        public void Remover(ClienteModel obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ClienteModel Buscar(int id)
+        {
+            try 
+            {
+                Database db = new DatabaseProviderFactory().Create("Database");
+
+                string query = @" SELECT ID, NOME, SOBRENOME, CPF, RG, IDADE, IDCARTAO, IDCONTA
+                                  FROM CLIENTE
+                                  WHERE ID = @ID";
+
+                using (DbCommand cmd = db.GetSqlStringCommand(query))
+                {
+                    db.AddInParameter(cmd, "@ID", DbType.Int32, id);
+                    
+                   
+                    using(IDataReader dr = db.ExecuteReader(cmd))
+                    {
+                                            
+                    }
+                }
+            }
+            catch(Exception)
+            {
+            
+            }
+        }
+
+        public List<ClienteModel> BuscarTodos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ClienteInfoModel> BuscarTodasInformacoes()
+        {
+            List<ClienteInfoModel> listaClienteInfo = new List<ClienteInfoModel>();
+            try
+            {
+                Database db = new DatabaseProviderFactory().Create("Database");
+
+                string query = @"SELECT CLI.ID, CLI.NOME,CLI.SOBRENOME, CLI.CPF, CLI.RG, CLI.IDADE, 
+                                CAR.DATAVALIDADE, CLI.IDCARTAO, CON.SALDO, CLI.IdConta 
+                                FROM CLIENTE CLI
+                                INNER JOIN CARTAO CAR ON CLI.IDCARTAO = CAR.ID
+                                INNER JOIN CONTA CON ON CON.ID = CLI.IDCONTA";
+
+
+                using (DbCommand cmd = db.GetSqlStringCommand(query))
+                {
+                    using (IDataReader dr = db.ExecuteReader(cmd))
+                    {
+                        while (dr.Read())
+                        {
+                            ClienteInfoModel clienteInfo = new ClienteInfoModel();
+                            clienteInfo.Id = Convert.ToInt32(dr["ID"]);
+                            clienteInfo.Nome = Convert.ToString(dr["NOME"]);
+                            clienteInfo.Sobrenome = Convert.ToString(dr["SOBRENOME"]);
+                            clienteInfo.CPF = Convert.ToString(dr["CPF"]);
+                            clienteInfo.RG = Convert.ToString(dr["RG"]);
+                            clienteInfo.Idade = Convert.ToInt32(dr["IDADE"]);
+                            clienteInfo.DataValidadeCartao = Convert.ToDateTime(dr["DATAVALIDADE"]);
+                            clienteInfo.IdCartao = Convert.ToInt32(dr["IDCARTAO"]);
+                            clienteInfo.NumeroCartao = Convert.ToInt32(dr["IDCARTAO"]);
+                            clienteInfo.Saldo = Convert.ToDouble(dr["SALDO"]);
+                            clienteInfo.IdConta = Convert.ToInt32(dr["IDCONTA"]);                        
+
+                            listaClienteInfo.Add(clienteInfo);
+                            
+                        }
+                    }
+                }
+                return listaClienteInfo;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

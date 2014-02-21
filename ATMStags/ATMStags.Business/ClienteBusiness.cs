@@ -36,12 +36,28 @@ namespace ATMStags.Business
 
         public ClienteModel Buscar(int id)
         {
-            throw new NotImplementedException();
+            ClienteData data = new ClienteData();
+            data.Buscar(id);
         }
 
         public List<ClienteModel> BuscarTodos()
         {
             throw new NotImplementedException();
+        }
+
+        public List<ClienteInfoModel> BuscarTodasInformacoes()
+        {
+            try
+            {
+                ClienteData data = new ClienteData();
+
+                return data.BuscarTodasInformacoes();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
     }
 }
