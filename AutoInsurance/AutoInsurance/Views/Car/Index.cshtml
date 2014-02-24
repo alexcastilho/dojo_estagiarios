@@ -1,0 +1,40 @@
+﻿@model AutoInsurance.Web.Models.ProposalViewModel
+
+@{
+    ViewBag.Title = "Index";    
+}
+
+<h2>Choose your car:</h2>
+
+
+@using (Html.BeginForm("Index", "Proposal"))
+{
+    @Html.HiddenFor(m => m.FirstName)
+    @Html.HiddenFor(m => m.LastName)
+    @Html.HiddenFor(m => m.Age)
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Model</th>
+                <th>Manufacturer</th>
+                <th>Photo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Cars)
+            {
+                <tr>
+                    <td>@Html.RadioButtonFor(m => Model.CarId, item.Id)</td>
+                    <td>@item.Model</td>
+                    <td>@item.Manufacturer</td>
+                    <td>
+                        <img src="@item.PhotoUrl" style=" height:80px; width:100px"/></td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    <br />
+    <button class="btn">Next</button>
+}

@@ -1,0 +1,24 @@
+﻿@model AutoInsurance.Web.Models.ProposalViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm("Save", "Proposal"))
+{
+    @Html.HiddenFor(m => m.FirstName)
+    @Html.HiddenFor(m => m.LastName)
+    @Html.HiddenFor(m => m.ProposalValue)
+    @Html.HiddenFor(m => m.Age)
+    @Html.HiddenFor(m => m.CarId)
+
+    <h2>Proposal Review</h2>
+
+    <h4>Insured</h4>
+    <p>@Model.FirstName @Model.LastName </p>
+
+    <h4>Proposal Value: </h4>
+    <p>@Model.ProposalValue.ToString("c")</p>
+    
+    <button class="btn">Save</button>
+}
