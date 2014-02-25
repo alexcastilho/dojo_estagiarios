@@ -4,58 +4,89 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoInsurance.Model;
+using AutoInsurance.Data.Interfaces;
 
 namespace AutoInsurance.Data
 {
-    public class CarRepository
+    public class CarRepository : IRepository<Car>
     {
-        public bool Save(Car obj)
-        {
-            return true;
-        }
-
         public List<Car> FindAll()
         {
-            // return new List<Car>(); 
             List<Car> carros = new List<Car>();
 
-            carros.Add(new Car() 
+            try
             {
-                Id = 1,
-                Manufacturer = "Ferrari",
-                Model = "F50",
-                PhotoUrl = "http://upload.wikimedia.org/wikipedia/commons/2/2c/SC06_1995_Ferrari_F50.jpg"
-            });
+                using (Database db = new Database())
+                {
+                    carros = (from c in db.Car
+                              select c).ToList();
+                }
+                return carros;
 
-            carros.Add(new Car()
+            }
+            catch (Exception)
             {
-                Id = 2,
-                Manufacturer = "Honda",
-                Model = "Civic",
-                PhotoUrl = "http://carplace.virgula.uol.com.br/wp-content/uploads/2013/01/Honda-Civic-Aero-Pack-1.jpg"
-            });
-
-            carros.Add(new Car()
-            {
-                Id = 3,
-                Manufacturer = "Volkswagen",
-                Model = "Fusca",
-                PhotoUrl = "http://listonas.com.br/wp-content/uploads/2013/04/fusca-listonas-2.jpg"     
-            });
-
-
-            return carros;
-            
+                throw;
+            }
         }
 
-        public Car FindById(int Id)
+        public void Insert(Car obj)
         {
-            return new Car();
+            try
+            {
+                using (Database db = new Database())
+                {
+                    db.Car.Add(obj);
+
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public bool Delete(Car obj)
+        public void Delete(int id)
         {
-            return true;
+            try
+            {
+                using (Database db = new Database()) 
+                {
+                    var car = db.Car.Find(id);
+                    db.Car.Remove(car);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void Update(Car obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Car Find(int id)
+        {
+            Car car = null;
+
+            try
+            {
+                using (Database db = new Database())
+                {
+                    car = db.Car.Find(id);
+                }
+
+                return car;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
     }
 }

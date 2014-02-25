@@ -4,29 +4,75 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoInsurance.Model;
+using AutoInsurance.Data.Interfaces;
 
 namespace AutoInsurance.Data
 {
-    public class InsuredRepository
+    public class InsuredRepository : IRepository<Insured>
     {
-        public bool Save(Insured obj)
+
+        public void Insert(Insured obj)
         {
-            return true;
+            try
+            {
+                using (Database db = new Database())
+                {
+                    db.Insured.Add(obj);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            try
+            {
+                using (Database db = new Database())
+                {
+                    Insured insured = db.Insured.Find(id);
+                    db.Insured.Remove(insured);
+
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void Update(Insured obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Insured Find(int id)
+        {
+            Insured insured = null;
+
+            try
+            {
+                using (Database db = new Database())
+                {
+                    insured = db.Insured.Find(id);
+                }
+
+                return insured;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public List<Insured> FindAll()
         {
-            return new List<Insured>();
-        }
-
-        public Insured FindById(int Id)
-        {
-            return new Insured();
-        }
-
-        public bool Delete(Insured obj)
-        {
-            return true;
+            throw new NotImplementedException();
         }
     }
 }

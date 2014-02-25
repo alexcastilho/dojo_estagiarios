@@ -4,20 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoInsurance.Model;
+using AutoInsurance.Data.Interfaces;
 
 namespace AutoInsurance.Data
 {
-    public class ProposalRepository
+    public class ProposalRepository : IRepository<Proposal> 
     {
-        public bool Save(Proposal obj)
-        {
-            return true;
-        }
-
         public List<Proposal> FindAll()
         {
-            //return new List<Proposal>();
-
             List<Proposal> list = new List<Proposal>();
 
             list.Add(new Proposal
@@ -43,14 +37,37 @@ namespace AutoInsurance.Data
             return list;
         }
 
-        public Proposal FindById(int Id)
+        public void Insert(Proposal obj)
         {
-            return new Proposal();
+            try
+            {
+                using (Database db = new Database()) 
+                {
+                    db.Entry(obj.Insured).State = System.Data.EntityState.Unchanged;
+                    db.Entry(obj.Car).State = System.Data.EntityState.Unchanged;
+                    db.Proposal.Add(obj);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public bool Delete(Proposal obj)
+        public void Delete(int id)
         {
-            return true;
+            throw new NotImplementedException();
+        }
+
+        public void Update(Proposal obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Proposal Find(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

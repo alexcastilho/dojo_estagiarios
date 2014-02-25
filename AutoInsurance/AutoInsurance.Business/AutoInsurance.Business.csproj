@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CarBusiness.cs" />
+    <Compile Include="Interfaces\IBusiness.cs" />
     <Compile Include="ProposalBusiness.cs" />
     <Compile Include="InsuredBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

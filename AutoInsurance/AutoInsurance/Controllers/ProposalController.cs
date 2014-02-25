@@ -26,10 +26,12 @@ namespace AutoInsurance.Web.Controllers
             proposal.Insured.FirstName = obj.FirstName;
             proposal.Insured.LastName = obj.LastName;
             proposal.Insured.Age = obj.Age;
-            proposal.Car = new Car();
-            proposal.Car.Id = obj.CarId;
+            CarBusiness carBusiness = new CarBusiness();
+            proposal.Car = carBusiness.Find(obj.CarId);
 
-            proposalBusiness.Save(proposal);
+            InsuredBusiness insuredBusiness = new InsuredBusiness();
+            insuredBusiness.Insert(proposal.Insured);
+            proposalBusiness.Insert(proposal);
 
             return RedirectToAction("Index", "Home");
         }

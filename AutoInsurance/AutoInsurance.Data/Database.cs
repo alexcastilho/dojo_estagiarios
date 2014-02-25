@@ -11,5 +11,7 @@ namespace AutoInsurance.Data
     public class Database : DbContext
     {
         public DbSet<Insured> Insured { get; set; }
+        public DbSet<Car> Car { get; set; }
+        public DbSet<Proposal> Proposal { get; set; }
     }
 }

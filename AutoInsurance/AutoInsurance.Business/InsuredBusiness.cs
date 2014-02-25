@@ -5,33 +5,59 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoInsurance.Data;
 using AutoInsurance.Model;
+using AutoInsurance.Business.Interfaces;
 
 namespace AutoInsurance.Business
 {
-    public class InsuredBusiness
+    public class InsuredBusiness : IBusiness<Insured>
     {
-        public bool Save(Insured obj)
+        public void Insert(Insured obj)
         {
-            InsuredRepository repository = new InsuredRepository();
-            return repository.Save(obj);
+            try
+            {
+                InsuredRepository insuredRepository = new InsuredRepository();
+                insuredRepository.Insert(obj);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void Update(Insured obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int id)
+        {
+            try
+            {
+                InsuredRepository insuredRepository = new InsuredRepository();
+                insuredRepository.Delete(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Insured Find(int id)
+        {
+            try
+            {
+                InsuredRepository insuredRepository = new InsuredRepository();
+                return insuredRepository.Find(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public List<Insured> FindAll()
         {
-            InsuredRepository repository = new InsuredRepository();
-            return repository.FindAll();
-        }
-
-        public Insured FindById(int Id)
-        {
-            InsuredRepository repository = new InsuredRepository();
-            return repository.FindById(Id);
-        }
-
-        public bool Delete(Insured obj)
-        {
-            InsuredRepository repository = new InsuredRepository();
-            return repository.Delete(obj);
+            throw new NotImplementedException();
         }
     }
 }

@@ -5,33 +5,68 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoInsurance.Data;
 using AutoInsurance.Model;
+using AutoInsurance.Business.Interfaces;
 
 namespace AutoInsurance.Business
 {
-    public class CarBusiness
+    public class CarBusiness : IBusiness<Car>
     {
-        public bool Save(Car obj)
-        {
-            CarRepository repository = new CarRepository();
-            return repository.Save(obj);
-        }
-
         public List<Car> FindAll()
         {
-            CarRepository repository = new CarRepository();
-            return repository.FindAll();
+            try
+            {
+                CarRepository repository = new CarRepository();
+                return repository.FindAll();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public Car FindById(int Id)
+        public void Insert(Car car)
         {
-            CarRepository repository = new CarRepository();
-            return repository.FindById(Id);
+            try
+            {
+                CarRepository carRepository = new CarRepository();
+                carRepository.Insert(car);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public bool Delete(Car obj)
+        public void Update(Car obj)
         {
-            CarRepository repository = new CarRepository();
-            return repository.Delete(obj);
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int id)
+        {
+            try
+            {
+                CarRepository carRepository = new CarRepository();
+                carRepository.Delete(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Car Find(int id)
+        {
+            try
+            {
+                CarRepository carRepository = new CarRepository();
+                return carRepository.Find(id);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

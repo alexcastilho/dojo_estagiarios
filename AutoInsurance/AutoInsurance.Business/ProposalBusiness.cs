@@ -5,33 +5,43 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoInsurance.Data;
 using AutoInsurance.Model;
+using AutoInsurance.Business.Interfaces;
 
 namespace AutoInsurance.Business
 {
-    public class ProposalBusiness
+    public class ProposalBusiness: IBusiness<Proposal>
     {
-        public bool Save(Proposal obj)
+        public void Insert(Proposal obj)
         {
-            ProposalRepository repository = new ProposalRepository();
-            return repository.Save(obj);
+            try
+            {
+                ProposalRepository proposalRepository = new ProposalRepository();
+                proposalRepository.Insert(obj);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void Update(Proposal obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Proposal Find(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Proposal> FindAll()
         {
-            ProposalRepository repository = new ProposalRepository();
-            return repository.FindAll();
-        }
-
-        public Proposal FindById(int Id)
-        {
-            ProposalRepository repository = new ProposalRepository();
-            return repository.FindById(Id);
-        }
-
-        public bool Delete(Proposal obj)
-        {
-            ProposalRepository repository = new ProposalRepository();
-            return repository.Delete(obj);
+            throw new NotImplementedException();
         }
     }
 }
