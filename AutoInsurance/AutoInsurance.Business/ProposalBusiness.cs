@@ -16,6 +16,7 @@ namespace AutoInsurance.Business
             try
             {
                 ProposalRepository proposalRepository = new ProposalRepository();
+                obj.Value = new Random().Next(1, 5000);
                 proposalRepository.Insert(obj);
             }
             catch (Exception)
@@ -41,7 +42,15 @@ namespace AutoInsurance.Business
 
         public List<Proposal> FindAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                ProposalRepository proposalRepository = new ProposalRepository();
+                return proposalRepository.FindAll();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

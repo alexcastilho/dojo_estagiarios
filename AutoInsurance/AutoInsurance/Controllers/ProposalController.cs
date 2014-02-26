@@ -33,7 +33,7 @@ namespace AutoInsurance.Web.Controllers
             insuredBusiness.Insert(proposal.Insured);
             proposalBusiness.Insert(proposal);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("List", "Proposal");
         }
         public ActionResult List()
         {

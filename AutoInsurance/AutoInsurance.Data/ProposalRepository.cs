@@ -14,27 +14,19 @@ namespace AutoInsurance.Data
         {
             List<Proposal> list = new List<Proposal>();
 
-            list.Add(new Proposal
+            try
             {
-                Id = 1,
-                Value = 500,
-                Car = new Car
+                using (Database db = new Database())
                 {
-                    Id = 1,
-                    Manufacturer = "Honda",
-                    Model = "Civic",
-                    PhotoUrl = String.Empty
-                },
-                Insured = new Insured
-                {
-                    Id = 1,
-                    FirstName = "John",
-                    LastName = "Val John",
-                    Age = 80
+                    list = db.Proposal.Include("Car").Include("Insured").ToList();
                 }
-            });
 
-            return list;
+                return list;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void Insert(Proposal obj)
