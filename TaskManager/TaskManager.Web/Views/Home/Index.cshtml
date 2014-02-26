@@ -1,0 +1,12 @@
+﻿@model List<TaskManager.Web.Models.TaskModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h4>Task:</h4>
+<input type="text" id="txtDescription" value="" /><br />
+<button class="btn" id="btnAdd">Add</button>
+
+<div id="grdTask">
+    @Html.Partial("GridTask", Model)
+</div>
