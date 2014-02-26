@@ -1,6 +1,6 @@
 ﻿@model List<TaskManager.Web.Models.TaskModel>
 
-<div style="-webkit-transform:rotate(57deg);">
+<div>
     <table class="table">
         <thead>
             <tr>
@@ -25,7 +25,7 @@
                         <i class="icon-share-alt" style="-webkit-transform:rotate(180deg);" onclick="undoTask(this,@item.Id)"></i>
                     </td>
                     <td>
-                        <i class="icon-trash" onclick="deleteTask(this,@item.Id)" style="-webkit-transform:rotate(57deg);"></i>
+                        <i class="icon-trash" onclick="deleteTask(this,@item.Id)"></i>
                     </td>
                 </tr>
             }
