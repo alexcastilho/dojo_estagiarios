@@ -10,7 +10,10 @@ namespace ATMStags.Business
     {
         public void Debitar(ContaModel conta, double valor)
         {
-            conta.Saldo -= valor;
+            if (VerificarSaldo(conta, valor))
+            {
+                conta.Saldo -= valor;
+            }
         }
 
         public bool VerificarSaldo(ContaModel conta, double valor)

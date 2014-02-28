@@ -11,18 +11,21 @@ function addTask() {
 
 function doneTask(button, id){
 
-    $(button).parent().parent().css("background-color", "lightgreen");
-    $.ajax("http://localhost:58294/Home/Done/?Id=" + id);
+    $.ajax("http://localhost:58294/Home/Done/?Id=" + id).done(function (data) {
+        updateGrid(data);
+    });
 }
 
 function undoTask(button, id) {
     
-    $(button).parent().parent().css("background-color", "silver");
     $.ajax("http://localhost:58294/Home/Undo/?Id=" + id);
 
 }
 
 function deleteTask(button, id) {
-    $(button).parent().parent().remove();
     $.ajax("http://localhost:58294/Home/Delete/?Id=" + id);
+}
+
+function updateGrid(data) {
+    $("#grdTask").html(data);
 }

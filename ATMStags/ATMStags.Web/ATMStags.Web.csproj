@@ -44,6 +44,8 @@
     <Reference Include="System.Core" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -127,6 +129,7 @@
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
+    <Content Include="ATMStags.asmx" />
     <Content Include="CadastrarCliente.aspx" />
     <Content Include="ConsultarCliente.aspx" />
     <Content Include="Contact.aspx" />
@@ -231,6 +234,16 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Service References\SerasaWebService\ATMStags.Web.SerasaWebService.ValidarCPFResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SerasaWebService\Serasa.disco" />
+    <Content Include="Service References\SerasaWebService\configuration91.svcinfo" />
+    <Content Include="Service References\SerasaWebService\configuration.svcinfo" />
+    <Content Include="Service References\SerasaWebService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
   </ItemGroup>
@@ -279,6 +292,10 @@
     <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ATMStags.asmx.cs">
+      <DependentUpon>ATMStags.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CadastrarCliente.aspx.cs">
       <DependentUpon>CadastrarCliente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -318,6 +335,11 @@
     <Compile Include="RealizarSaque.aspx.designer.cs">
       <DependentUpon>RealizarSaque.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Service References\SerasaWebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -334,6 +356,7 @@
     <Content Include="Site.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Service References\SerasaWebService\Serasa.wsdl" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -350,6 +373,12 @@
       <Project>{68a03119-52d8-41b5-a2bd-5430d080ef17}</Project>
       <Name>ATMStags.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\SerasaWebService\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

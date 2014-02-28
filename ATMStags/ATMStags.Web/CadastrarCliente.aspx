@@ -2,6 +2,8 @@
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
 
+    <asp:Label ID="lblMensagem" runat="server"></asp:Label>
+
     <asp:Label ID="lblNome" runat="server" Text="Label" AssociatedControlID="txtNome">Nome:</asp:Label>
     <asp:TextBox ID="txtNome" runat="server"></asp:TextBox><br />
 

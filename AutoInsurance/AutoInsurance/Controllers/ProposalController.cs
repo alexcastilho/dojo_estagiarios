@@ -19,19 +19,31 @@ namespace AutoInsurance.Web.Controllers
 
         public ActionResult Save(ProposalViewModel obj)
         {
-            ProposalBusiness proposalBusiness = new ProposalBusiness();
+            try
+            {
+                ATMStagsReference.ATMStagsSoapClient atmStags = new ATMStagsReference.ATMStagsSoapClient();
 
-            Proposal proposal = new Proposal();
-            proposal.Insured = new Insured();
-            proposal.Insured.FirstName = obj.FirstName;
-            proposal.Insured.LastName = obj.LastName;
-            proposal.Insured.Age = obj.Age;
-            CarBusiness carBusiness = new CarBusiness();
-            proposal.Car = carBusiness.Find(obj.CarId);
+                ProposalBusiness proposalBusiness = new ProposalBusiness();
 
-            InsuredBusiness insuredBusiness = new InsuredBusiness();
-            insuredBusiness.Insert(proposal.Insured);
-            proposalBusiness.Insert(proposal);
+                Proposal proposal = new Proposal();
+                proposal.Insured = new Insured();
+                proposal.Insured.FirstName = obj.FirstName;
+                proposal.Insured.LastName = obj.LastName;
+                proposal.Insured.Age = obj.Age;
+                CarBusiness carBusiness = new CarBusiness();
+                proposal.Car = carBusiness.Find(obj.CarId);
+
+                InsuredBusiness insuredBusiness = new InsuredBusiness();
+                insuredBusiness.Insert(proposal.Insured);
+                proposalBusiness.Insert(proposal);
+
+                atmStags.Debitar(300, 2);
+
+            }
+            catch (Exception ex)
+            {
+
+            }
 
             return RedirectToAction("List", "Proposal");
         }

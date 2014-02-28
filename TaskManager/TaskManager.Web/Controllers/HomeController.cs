@@ -9,11 +9,14 @@ namespace TaskManager.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private static List<TaskModel> listTask = new List<TaskModel>();
+        private static TaskWeatherModel Tasks = new TaskWeatherModel();
         
         public ActionResult Index()
         {
-            return View(listTask);
+            WeatherReference.WeatherConsultingSoapClient weatherReference = new WeatherReference.WeatherConsultingSoapClient();
+            var weather = weatherReference.GetWeather("Campinas");
+            Tasks.Weather = weather;
+            return View(Tasks);
         }
 
         public ActionResult Add(String description)
@@ -21,39 +24,39 @@ namespace TaskManager.Web.Controllers
             TaskModel task = new TaskModel();
             task.Description = description;
             task.Status = 0;
-            task.Id = listTask.Count + 1;
+            task.Id = Tasks.Tasks.Count + 1;
 
-            if (!listTask.Exists(m => m.Description.Equals(task.Description)))
-                listTask.Add(task);
+            if (!Tasks.Tasks.Exists(m => m.Description.Equals(task.Description)))
+                Tasks.Tasks.Add(task);
 
-            return PartialView("GridTask", listTask);
+            return PartialView("GridTask", Tasks);
         }
 
         public ActionResult Done(int Id)
         {
-            TaskModel task = listTask.Find(i => i.Id == Id);
+            TaskModel task = Tasks.Tasks.Find(i => i.Id == Id);
             if (task != null)
                 task.Status = 1;
 
-            return PartialView("GridTask", listTask);
+            return PartialView("GridTask", Tasks);
         }
 
         public ActionResult Undo(int Id)
         {
-            TaskModel task = listTask.Find(i => i.Id == Id);
+            TaskModel task = Tasks.Tasks.Find(i => i.Id == Id);
             if (task != null)
                 task.Status = 2;
 
-            return PartialView("GridTask", listTask);
+            return PartialView("GridTask", Tasks);
         }
 
         public ActionResult Delete(int Id)
         {
-            TaskModel task = listTask.Find(i => i.Id == Id);
+            TaskModel task = Tasks.Tasks.Find(i => i.Id == Id);
             if (task != null)
-                listTask.Remove(task);
+                Tasks.Tasks.Remove(task);
 
-            return PartialView("GridTask", listTask);
+            return PartialView("GridTask", Tasks);
         }
           
     }
